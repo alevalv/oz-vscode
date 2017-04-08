@@ -1,0 +1,23 @@
+{
+    "fun":
+    {
+        "prefix": "fun",
+        "body":
+        [
+            "fun {$1}",
+            "\t$2",
+            "end"
+        ],
+        "description": "Function statement"
+    },
+    "if":
+    {
+        "prefix": "if",
+        "body":
+        [
+            "if $1:condition then",
+            "\t$2",
+            "end"
+        ]
+    }
+}

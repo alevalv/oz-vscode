@@ -1,0 +1,35 @@
+{
+    "name": "oz-vscode",
+    "displayName": "Mozart-Oz @ Visual Studio Code",
+    "description": "Mozart-Oz Language Support for Visual Studio Code",
+    "version": "0.0.1",
+    "publisher": "Alejandro Valdes",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "categories": [
+        "Languages",
+        "Snippets"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "oz",
+            "aliases": ["Mozart-Oz", "oz"],
+            "extensions": [".oz", ".mozart"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [
+            {
+                "language": "oz",
+                "scopeName": "source.oz",
+                "path": "./syntaxes/oz.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "oz",
+                "path": "./snippets/oz.json"
+            }
+        ]
+    }
+}

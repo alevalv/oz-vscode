@@ -1,9 +1,36 @@
 ### oz-vscode Extension
-This is the official repo of the Mozart Oz Visual Studio Code extension.
+This extension add supports to the MOzArt language to Visual Studio Code.
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+It is published as an early alpha and it could contain multiple bugs.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+To compile oz code in Visual Studio Code you can add this to your tasks.json of your project:
 
-You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
-
+```
+{
+    "version": "0.1.0",
+    "tasks": [
+        {
+            "taskName": "build",
+            "command": "ozc",
+            "isShellCommand": true,
+            "isBackground": true,
+            "args": [
+                "-c",
+                "${file}"
+            ],
+            "showOutput": "always",
+            "isBuildCommand": true
+        },
+        {
+            "taskName": "run",
+            "command": "ozengine",
+            "isShellCommand": true,
+            "args": [
+                "${fileBasenameNoExtension}.ozf"
+            ],
+            "showOutput": "always",
+            "isTestCommand": true
+        }
+    ]
+}
+```

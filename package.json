@@ -3,7 +3,8 @@
     "displayName": "Mozart-Oz @ Visual Studio Code",
     "description": "Mozart-Oz Language Support for Visual Studio Code",
     "version": "0.0.1",
-    "publisher": "Alejandro Valdes",
+    "publisher": "alevalv",
+    "license": "GNU GPLv3",
     "engines": {
         "vscode": "^1.11.0"
     },

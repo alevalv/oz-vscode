@@ -1,7 +1,7 @@
 {
     "name": "oz-vscode",
-    "displayName": "Mozart-Oz @ Visual Studio Code",
-    "description": "Mozart-Oz Language Support for Visual Studio Code",
+    "displayName": "MOzArt @ Visual Studio Code",
+    "description": "MOzArt Language Support for Visual Studio Code",
     "version": "0.0.1",
     "publisher": "alevalv",
     "license": "GNU GPLv3",

@@ -26,7 +26,7 @@
             "patterns": [
                 {
                     "name": "keyword.control.oz",
-                    "match": "\\b(andthen|at|attr|catch|choice|class|cond|declare|define|dis|div|do|else|elsecase|elseif|export|fail|feat|finally|for|from|functor|if|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|proc|prop|raise|require|self|skip|then|thread|try|unit)\\b"
+                    "match": "\\b(andthen|at|attr|catch|choice|class|cond|declare|define|dis|div|do|else|elsecase|elseif|export|fail|feat|finally|for|from|functor|if|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|proc|prop|raise|require|self|skip|then|thread|try|unit|end)\\b"
                 },
                 {
                     "name": "keyword.control.operator.oz",

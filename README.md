@@ -3,6 +3,8 @@ This extension add supports to the MOzArt language to Visual Studio Code.
 
 It is published as an early alpha and it could contain multiple bugs.
 
+Source code can be found at [GitHub](https://github.com/alevalv/oz-vscode)
+
 To compile oz code in Visual Studio Code you can add this to your tasks.json of your project:
 
 ```

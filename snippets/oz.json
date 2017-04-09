@@ -76,6 +76,16 @@
         ],
         "description": "Local statement block"
     },
+    "define":
+    {
+        "prefix": "define",
+        "body":
+        [
+            "define $1",
+            "\t$2",
+            "end"
+        ]
+    },
     "System out":
     {
         "prefix": "sout",

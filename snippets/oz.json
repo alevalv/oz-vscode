@@ -10,6 +10,17 @@
         ],
         "description": "Function statement"
     },
+    "proc":
+    {
+        "prefix": "proc",
+        "body":
+        [
+            "proc {$1}",
+            "\t$2",
+            "end"
+        ],
+        "description": "Procedure statement"
+    },
     "if":
     {
         "prefix": "if",
@@ -18,6 +29,59 @@
             "if $1:condition then",
             "\t$2",
             "end"
+        ],
+        "description": "if statement"
+    },
+    "ifelse":
+    {
+        "prefix": "ifelse",
+        "body":
+        [
+            "if $1 then",
+            "\t$2",
+            "else",
+            "\t$3",
+            "end"
+        ],
+        "description": "if statement"
+    },
+    "elseif":
+    {
+        "prefix": "elseif",
+        "body":
+        [
+            "elseif $1 then",
+            "\t$2"
+        ]
+    },
+    "case":
+    {
+        "prefix": "case",
+        "body":
+        [
+            "case $1 of",
+            "\t$2 then",
+            "\t\t$3",
+            "end"
+        ]
+    },
+    "local":
+    {
+        "prefix": "local",
+        "body":
+        [
+            "local $1 in",
+            "\t$2",
+            "end"
+        ],
+        "description": "Local statement block"
+    },
+    "System out":
+    {
+        "prefix": "sout",
+        "body":
+        [
+            "{System.print $1}"
         ]
     }
 }

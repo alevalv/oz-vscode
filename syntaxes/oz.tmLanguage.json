@@ -1,92 +1,102 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Mozart-Oz",
-	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "constants"
-		},
-		{
-			"include": "#entities"
-		},
-		{
-			"include": "variables"
-		},
-		{
-			"include": "#comments"
-		},
-		{
-			"include": "#storage"
-		}
-	],
-	"repository": {
-		"keywords": {
-			"patterns": [
-				{
-					"name": "keyword.control.oz",
-					"match": "\\b(andthen|at|attr|catch|choice|class|cond|declare|define|dis|div|do|else|elsecase|elseif|export|fail|feat|finally|for|from|functor|if|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|proc|prop|raise|require|self|skip|then|thread|try|unit)\\b"
-				},
-				{
-					"name": "keyword.control.operator.oz",
-					"match": "\\b *(=|or|\\+|-|:=|::|&|@|==|=<|>=|>|<|\\=|\\=:) *\\b"
-				}
-			]
-		},
-		"constants": {
-			"patterns": [
-				{
-					"name": "constant.numeric.oz",
-					"match": "(~?\\d+\\.\\d+|~?\\d+)\\b"
-				},
-				{
-					"name": "constant.language.oz",
-					"match": "(?&lt;!\\.)\\b(false|true|nil)"
-				},
-				{
-					"name": "constant.language.boolean.oz",
-					"match": "\\b(true|false)"
-				}
-			]
-		},
-		"entities": {
-			"patterns": [
-
-			]
-		},
-		"variables": {
-			"patterns": [
-				{
-					"name": "variable.parameter.oz",
-					"match": "\\b(case|end|local)"
-				},
-				{
-					"name": "variable.language",
-					"match": "\\b(Browse)"
-				}
-			]
-		},
-		"comments": {
-			"patterns": [
-				{
-					"name": "comment.line.number-sign.oz",
-					"match": "(%).*$\n?"
-				},
-				{
-					"name": "comment.block.oz",
-					"match":"\\*([^*]|[\r\n]|(\\*+([^*\/]|[\r\n])))*\\*+"
-				}
-			]
-		},
-		"storage": {
-			"patterns": [
-				{
-					"name": "storage.type.oz",
-					"match": "\\b(local|proc|fun)"
-				}
-			]
-		}
-	},
-	"scopeName": "source.oz"
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Mozart-Oz",
+    "patterns": [
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "constants"
+        },
+        {
+            "include": "#entities"
+        },
+        {
+            "include": "variables"
+        },
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#storage"
+        }
+    ],
+    "repository": {
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control.oz",
+                    "match": "\\b(andthen|at|attr|catch|choice|class|cond|declare|define|dis|div|do|else|elsecase|elseif|export|fail|feat|finally|for|from|functor|if|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|proc|prop|raise|require|self|skip|then|thread|try|unit)\\b"
+                },
+                {
+                    "name": "keyword.control.operator.oz",
+                    "match": "\\b *(=|Or|And|\\+|-|:=|::|&|@|==|=<|>=|>|<|\\=|\\=:|mod|#|.) *\\b"
+                }
+            ]
+        },
+        "constants": {
+            "patterns": [
+                {
+                    "name": "constant.numeric.oz",
+                    "match": "(~?\\d+\\.\\d+|~?\\d+)\\b"
+                },
+                {
+                    "name": "constant.language.oz",
+                    "match": "(?&lt;!\\.)\\b(false|true|nil)"
+                },
+                {
+                    "name": "constant.language.boolean.oz",
+                    "match": "\\b(true|false)"
+                }
+            ]
+        },
+        "entities": {
+            "patterns": [
+                {
+                    "name": "entity.name.function.oz",
+                    "match": "{([A-z0-9]\\.*)+ (([A-z0-9]) *)+}"
+                }
+            ]
+        },
+        "variables": {
+            "patterns": [
+                {
+                    "name": "variable.parameter.oz",
+                    "match": "\\b(case|end|local)"
+                },
+                {
+                    "name": "variable.language",
+                    "match": "\\b(Browse)"
+                }
+            ]
+        },
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.number-sign.oz",
+                    "match": "(%).*$\n?"
+                },
+                {
+                    "name": "comment.block.oz",
+                    "begin": "/\\*",
+                    "captures":{
+                        "0" :
+                        {
+                            "name": "punctuation.definition.comment.mn"
+                        }
+                    },
+                    "end": "\\*/"
+                }
+            ]
+        },
+        "storage": {
+            "patterns": [
+                {
+                    "name": "storage.type.oz",
+                    "match": "\\b(local|proc|fun)"
+                }
+            ]
+        }
+    },
+    "scopeName": "source.oz"
 }

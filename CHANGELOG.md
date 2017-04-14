@@ -3,7 +3,7 @@
 ## 0.0.3
 - Added snippets for raise, try-catch and finally
 - Fixed some errors and improved older snippets
-- Added numberic highlighting (basic)
+- Added numeric highlighting (basic)
 - Fixed several highlighting issues
 
 ## 0.0.2

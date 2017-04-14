@@ -1,8 +1,8 @@
 {
     "name": "oz-vscode",
-    "displayName": "MOzArt @ Visual Studio Code",
+    "displayName": "MOzArt for VSCode",
     "description": "MOzArt Language Support for Visual Studio Code",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "publisher": "alevalv",
     "license": "GNU GPLv3",
     "engines": {
@@ -15,7 +15,7 @@
     "contributes": {
         "languages": [{
             "id": "oz",
-            "aliases": ["Mozart-Oz", "oz"],
+            "aliases": ["oz", "MOzArt"],
             "extensions": [".oz", ".mozart"],
             "configuration": "./language-configuration.json"
         }],

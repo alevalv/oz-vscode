@@ -26,7 +26,7 @@
         "prefix": "if",
         "body":
         [
-            "if $1:condition then",
+            "if ${1:condition} then",
             "\t$2",
             "end"
         ],
@@ -37,22 +37,23 @@
         "prefix": "ifelse",
         "body":
         [
-            "if $1 then",
+            "if ${1:condition} then",
             "\t$2",
             "else",
             "\t$3",
             "end"
         ],
-        "description": "if statement"
+        "description": "if with else statement"
     },
     "elseif":
     {
         "prefix": "elseif",
         "body":
         [
-            "elseif $1 then",
+            "elseif ${1:condition} then",
             "\t$2"
-        ]
+        ],
+        "description": "elseif statement"
     },
     "case":
     {
@@ -60,10 +61,11 @@
         "body":
         [
             "case $1 of",
-            "\t$2 then",
+            "\t${2:pattern} then",
             "\t\t$3",
             "end"
-        ]
+        ],
+        "description": "Case definition block"
     },
     "local":
     {
@@ -85,6 +87,47 @@
             "\t$2",
             "end"
         ]
+    },
+    "raise":
+    {
+        "prefix": "raise",
+        "body":
+        [
+            "raise $1 end"
+        ],
+        "description": "Raise exception block"
+    },
+    "try":
+    {
+        "prefix": "try",
+        "body":
+        [
+            "try",
+            "\t$1",
+            "catch $2 then",
+            "\t$3",
+            "end"
+        ],
+        "description": "Try with catch block"
+    },
+    "finally":
+    {
+        "prefix": "finally",
+        "body":
+        [
+            "finally",
+            "\t$1"
+        ],
+        "description": "Finally statement"
+    },
+    "pattern":
+    {
+        "prefix": "[]",
+        "body":
+        [
+            "[] ${1:pattern} then $2"
+        ],
+        "description": "Pattern block"
     },
     "System out":
     {

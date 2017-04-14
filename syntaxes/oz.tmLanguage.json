@@ -6,7 +6,7 @@
             "include": "#keywords"
         },
         {
-            "include": "constants"
+            "include": "#constants"
         },
         {
             "include": "#entities"
@@ -18,7 +18,10 @@
             "include": "#comments"
         },
         {
-            "include": "#storage"
+            "include": "#statements"
+        },
+        {
+            "include": "#invalid"
         }
     ],
     "repository": {
@@ -26,11 +29,31 @@
             "patterns": [
                 {
                     "name": "keyword.control.oz",
-                    "match": "\\b(andthen|at|attr|catch|choice|class|cond|declare|define|dis|div|do|else|elsecase|elseif|export|fail|feat|finally|for|from|functor|if|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|proc|prop|raise|require|self|skip|then|thread|try|unit|end)\\b"
+                    "match": "\\b(then|andthen|at|attr|choice|class|cond|declare|define|dis|div|do|elsecase|export|fail|feat|finally|for|from|functor|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|prop|require|self|skip|then|thread|unit|end|local)\\b"
+                },
+                {
+                    "name": "keyword.control.conditional.oz",
+                    "match": "\\b(else|elseif|if)\\b"
+                },
+                {
+                    "name": "keyword.control.function.oz",
+                    "match": "\\b(fun|proc)\\b"
+                },
+                {
+                    "name": "keyword.control.trycatch.oz",
+                    "match": "\\b(catch|raise|try|finally)\\b"
+                },
+                {
+                    "name": "keyword.control.case.oz",
+                    "match": "\\b(case|of|then)\\b"
                 },
                 {
                     "name": "keyword.control.operator.oz",
-                    "match": "\\b *(=|Or|And|\\+|-|:=|::|&|@|==|=<|>=|>|<|\\=|\\=:|mod|#|.) *\\b"
+                    "match": "\\b(Or|And|\\+|-|::|&|@|==|=<|>=|>|<|mod|#|\\.|\\|)\\b"
+                },
+                {
+                    "name": "keyword.control.operator.assignment.oz",
+                    "match": "\\b(\\=|\\=:)\\b"
                 }
             ]
         },
@@ -38,15 +61,11 @@
             "patterns": [
                 {
                     "name": "constant.numeric.oz",
-                    "match": "(~?\\d+\\.\\d+|~?\\d+)\\b"
+                    "match": "\\b(\\d+|\\d+\\.\\d+])\\b"
                 },
                 {
                     "name": "constant.language.oz",
-                    "match": "(?&lt;!\\.)\\b(false|true|nil)"
-                },
-                {
-                    "name": "constant.language.boolean.oz",
-                    "match": "\\b(true|false)"
+                    "match": "\\b(false|true|nil)\\b"
                 }
             ]
         },
@@ -55,18 +74,6 @@
                 {
                     "name": "entity.name.function.oz",
                     "match": "{([A-z0-9]\\.*)+ (([A-z0-9]) *)+}"
-                }
-            ]
-        },
-        "variables": {
-            "patterns": [
-                {
-                    "name": "variable.parameter.oz",
-                    "match": "\\b(case|end|local)"
-                },
-                {
-                    "name": "variable.language",
-                    "match": "\\b(Browse)"
                 }
             ]
         },
@@ -89,11 +96,39 @@
                 }
             ]
         },
-        "storage": {
+
+        "statements":
+        {
             "patterns": [
                 {
-                    "name": "storage.type.oz",
-                    "match": "\\b(local|proc|fun)"
+                    "name": "caseexpresion.expr.oz",
+                    "begin": "(case)\\s+.*\\s+of",
+                    "beginCaptures":
+                    {
+                        "1":
+                        {
+                            "name":"keyword.control.case.oz"
+                        }
+                    },
+                    "end": "end"
+                }
+            ]
+        },
+        "invalid":
+        {
+            "patterns": [
+                {
+                    "name": "invalid.illegal.incomplete-assigment.oz",
+                    "match": "\\b[A-Z][0-9a-zA-Z]*\\s*=\\s*\\n"
+                }
+            ]
+        },
+        "meta":
+        {
+            "patterns": [
+                {
+                    "name": "meta.variable.oz",
+                    "match": "[A-Z][0-9a-zA-Z]*"
                 }
             ]
         }

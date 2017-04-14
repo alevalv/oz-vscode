@@ -32,6 +32,15 @@ To compile oz code in Visual Studio Code you can add this to your tasks.json of 
             ],
             "showOutput": "always",
             "isTestCommand": true
+        },
+        {
+            "taskName": "clean",
+            "command": "rm",
+            "isShellCommand": true,
+            "args": [
+                "${fileBasenameNoExtension}.ozf"
+            ],
+            "showOutput": "silent"
         }
     ]
 }

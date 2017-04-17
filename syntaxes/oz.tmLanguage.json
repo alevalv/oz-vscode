@@ -29,7 +29,7 @@
             "patterns": [
                 {
                     "name": "keyword.control.oz",
-                    "match": "\\b(then|andthen|at|attr|choice|class|cond|declare|define|dis|div|do|elsecase|export|fail|feat|finally|for|from|functor|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|prop|require|self|skip|then|thread|unit|end|local)\\b"
+                    "match": "\\b(then|and|andthen|at|attr|choice|class|cond|declare|define|dis|div|do|elsecase|export|fail|feat|finally|for|from|functor|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|prop|require|self|skip|then|thread|unit|end|local)\\b"
                 },
                 {
                     "name": "keyword.control.conditional.oz",
@@ -49,11 +49,11 @@
                 },
                 {
                     "name": "keyword.control.operator.oz",
-                    "match": "\\b(Or|And|\\+|-|::|&|@|==|=<|>=|>|<|mod|#|\\.|\\|)\\b"
+                    "match": "[\\b|\\s]*(\\+|-|::|&|@|==|=<|>=|>|<|#|\\.|\\||\\[\\])[\\b|\\s]*"
                 },
                 {
                     "name": "keyword.control.operator.assignment.oz",
-                    "match": "\\b(\\=|\\=:)\\b"
+                    "match": "[\\b|\\s]*(\\=|\\=:)[\\b|\\s]*"
                 }
             ]
         },
@@ -72,8 +72,20 @@
         "entities": {
             "patterns": [
                 {
-                    "name": "entity.name.function.oz",
-                    "match": "{([A-z0-9]\\.*)+ (([A-z0-9]) *)+}"
+                    "name": "meta.function.call.oz",
+                    "match": "{([[A-z0-9]+\\.*]+)\\s([[A-z0-9]+\\s*]+)}",
+                    "captures":
+                    {
+                        "1":
+                        {
+                            "name": "entity.name.function.oz"
+                        },
+                        "2":
+                        {
+                            "name": "variable.parameter.oz"
+                        }
+
+                    }
                 }
             ]
         },

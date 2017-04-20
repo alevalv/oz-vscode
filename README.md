@@ -1,4 +1,4 @@
-### oz-vscode Extension
+### MOzArt for VSCode Extension
 This extension add supports to the MOzArt language to Visual Studio Code.
 
 It is published as an early alpha and it could contain multiple bugs.

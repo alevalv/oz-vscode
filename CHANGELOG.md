@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.5
+- Adding more repository info in the package file
+- Added mozart icon
+
 ## 0.0.4
 - Fixed function highlighting (only for one line functions, multiline  calls are not working)
 - Fixed some operators highlighting

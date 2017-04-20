@@ -2,7 +2,7 @@
     "name": "oz-vscode",
     "displayName": "MOzArt for VSCode",
     "description": "MOzArt Language Support for Visual Studio Code",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "alevalv",
     "license": "GNU GPLv3",
     "engines": {
@@ -12,10 +12,17 @@
         "Languages",
         "Snippets"
     ],
+    "homepage": "https://github.com/alevalv/oz-vscode",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/alevalv/oz-vscode.git"
+    },
+    "icon": "images/icon.png",
+    "bugs": "https://github.com/alevalv/oz-vscode/issues",
     "contributes": {
         "languages": [{
             "id": "oz",
-            "aliases": ["oz", "MOzArt"],
+            "aliases": ["Oz", "MOzArt"],
             "extensions": [".oz", ".mozart"],
             "configuration": "./language-configuration.json"
         }],

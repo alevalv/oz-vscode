@@ -27,7 +27,7 @@
         "body":
         [
             "if ${1:condition} then",
-            "\t$2",
+            "\t${2:body}",
             "end"
         ],
         "description": "if statement"
@@ -38,9 +38,9 @@
         "body":
         [
             "if ${1:condition} then",
-            "\t$2",
+            "\t${2:body}",
             "else",
-            "\t$3",
+            "\t${3:body}",
             "end"
         ],
         "description": "if with else statement"
@@ -51,7 +51,7 @@
         "body":
         [
             "elseif ${1:condition} then",
-            "\t$2"
+            "\t${2:body}"
         ],
         "description": "elseif statement"
     },
@@ -62,7 +62,7 @@
         [
             "case $1 of",
             "\t${2:pattern} then",
-            "\t\t$3",
+            "\t\t${3:body}",
             "end"
         ],
         "description": "Case definition block"
@@ -72,8 +72,8 @@
         "prefix": "local",
         "body":
         [
-            "local $1 in",
-            "\t$2",
+            "local ${1:vNames} in",
+            "\t${2:body}",
             "end"
         ],
         "description": "Local statement block"
@@ -128,6 +128,18 @@
             "[] ${1:pattern} then $2"
         ],
         "description": "Pattern block"
+    },
+    "for:pattern":
+    {
+        "prefix": "for",
+        "body":
+        [
+            "for ${1:variable}",
+            "\tin ${2:iterable} do",
+            "\t\t${3:body}",
+            "end"
+        ],
+        "description": "For block"
     },
     "System out":
     {

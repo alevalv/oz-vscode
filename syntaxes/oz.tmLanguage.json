@@ -19,6 +19,9 @@
         },
         {
             "include": "#invalid"
+        },
+        {
+            "include": "#meta"
         }
     ],
     "repository": {
@@ -62,7 +65,7 @@
             "patterns": [
                 {
                     "name": "constant.numeric.oz",
-                    "match": "\\b(\\d+|\\d+\\.\\d+])\\b"
+                    "match": "(\\d+\\.\\d+|\\d+)"
                 },
                 {
                     "name": "constant.language.oz",
@@ -123,6 +126,15 @@
                 {
                     "name": "invalid.illegal.incomplete-assigment.oz",
                     "match": "\\b[A-Z][0-9a-zA-Z]*\\s*=\\s*\\n"
+                }
+            ]
+        },
+        "meta":
+        {
+            "patterns": [
+                {
+                    "name": "meta.variable.oz",
+                    "match": "[A-Z][0-9A-z]*"
                 }
             ]
         }

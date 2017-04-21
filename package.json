@@ -10,7 +10,8 @@
     },
     "categories": [
         "Languages",
-        "Snippets"
+        "Snippets",
+        "Other"
     ],
     "homepage": "https://github.com/alevalv/oz-vscode",
     "repository": {
@@ -19,7 +20,17 @@
     },
     "icon": "images/icon.png",
     "bugs": "https://github.com/alevalv/oz-vscode/issues",
+
+    "activationEvents": [
+        "onCommand:oz.build"
+    ],
+    "main": "./out/src/ozMain",
     "contributes": {
+        "commands":[{
+            "command": "oz.build",
+            "title": "Compile Oz file"
+        }],
+
         "languages": [{
             "id": "oz",
             "aliases": ["Oz", "MOzArt"],
@@ -39,5 +50,18 @@
                 "path": "./snippets/oz.json"
             }
         ]
+    },
+    "scripts": {
+        "vscode:prepublish": "tsc -p ./",
+        "compile": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32"
     }
 }

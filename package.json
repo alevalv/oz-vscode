@@ -11,6 +11,7 @@
     "categories": [
         "Languages",
         "Snippets",
+        "Linters",
         "Other"
     ],
     "homepage": "https://github.com/alevalv/oz-vscode",
@@ -22,7 +23,8 @@
     "bugs": "https://github.com/alevalv/oz-vscode/issues",
 
     "activationEvents": [
-        "onCommand:oz.build"
+        "onCommand:oz.build",
+        "onLanguage:oz"
     ],
     "main": "./out/src/ozMain",
     "contributes": {
@@ -49,7 +51,22 @@
                 "language": "oz",
                 "path": "./snippets/oz.json"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "MOzArt configuration",
+            "properties": {
+                "oz.compilerpath":{
+                    "type": "string",
+                    "default": null,
+                    "description": "The path to the Oz compiler"
+                },
+                "oz.enablelinter":{
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enables the linting of Oz files"
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",

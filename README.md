@@ -7,7 +7,7 @@ It is published as an early alpha and it could contain multiple bugs.
 
 Source code can be found at [GitHub](https://github.com/alevalv/oz-vscode)
 
-You can add the following code to the project's tasks.json to run Oz code from VSCode, remember to uncomment the lines acording to your current operating system:
+You can add the following code to the project's tasks.json to run Oz code from VSCode, remember to uncomment the lines according to your current operating system:
 
 ```json
 {

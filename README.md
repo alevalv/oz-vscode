@@ -3,7 +3,7 @@ MOzArt for VSCode Extension
 
 This extension adds support to the MOzArt language to Visual Studio Code.
 
-It is published as an early alpha and it could contain multiple bugs.
+It is considered a beta release and it could contain multiple bugs.
 
 Source code can be found at [GitHub](https://github.com/alevalv/oz-vscode)
 

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.0
+- Added a basic linter that uses the MOzArt compiler internally
+- Added example windows commands in the extension README
+
 ## 0.0.6
 - Fixed anonymous function highlighting
 - Added single quote and double quote string coloring

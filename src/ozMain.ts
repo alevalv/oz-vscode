@@ -35,7 +35,7 @@ function ozLinting(context: vscode.ExtensionContext):void
     }
 
     var ozCompilerPath:string;
-    if (IS_WINDOWS && (!configuration.has[COMPILER_PATH_PROPERTY_NAME] || configuration[COMPILER_PATH_PROPERTY_NAME] == null))
+    if (IS_WINDOWS && configuration[COMPILER_PATH_PROPERTY_NAME] == null)
     {
         window.showErrorMessage("Could not find path to the oz executable in the configuration file")
         return;

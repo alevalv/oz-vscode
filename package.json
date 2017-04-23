@@ -4,7 +4,7 @@
     "description": "MOzArt Language Support for Visual Studio Code",
     "version": "0.0.5",
     "publisher": "alevalv",
-    "license": "GNU GPLv3",
+    "license": "GPL-3.0",
     "engines": {
         "vscode": "^1.11.0"
     },

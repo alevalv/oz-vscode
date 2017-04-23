@@ -43,6 +43,11 @@ export function validateOz(fileName:string, validateOnSave = true, ozCompilerPat
                                 var diagnostic:IOzMessage;
                                 const bindAnalysisRegex = /\*+ binding analysis.+/;
                                 const staticAnalysisRegex = /\*+ static analysis.+/;
+                                const newLineRegex = /\r\n?|\n/;
+                                while (newLineRegex.test(error))
+                                {
+                                    error = error.replace(newLineRegex, '');
+                                }
                                 if (bindAnalysisRegex.test(error))
                                 {
                                     diagnostic = parseBindAnalysis(error, fileName);
@@ -72,7 +77,7 @@ export function validateOz(fileName:string, validateOnSave = true, ozCompilerPat
 
 function parseBindAnalysis(text:string, fileName:string):IOzMessage
 {
-    var regex = /.*(warning|error).*\n\%\*\*\n\%\*\*(.*)\n\%\*\*\n\%\*\*.*\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
+    var regex = /.*(warning|error).*\%\*\*\%\*\*(.*)\n\%\*\*\%\*\*.*\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
     var match = regex.exec(text);
     var diagnostic:IOzMessage;
     if (match != null)
@@ -87,7 +92,7 @@ function parseBindAnalysis(text:string, fileName:string):IOzMessage
 
 function parseStaticAnalysis(text:string, fileName:string):IOzMessage
 {
-    var regex = /\*+\sstatic analysis (warning|error)\s\*+\n\%\*\*\n\%\*\*(.*)\n\%\*\*((.|\n|\r)*)\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
+    var regex = /\*+\sstatic analysis (warning|error)\s\*+\%\*\*\%\*\*(.*)\%\*\*((.|\n|\r)*)\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
     var match = regex.exec(text);
     var diagnostic:IOzMessage;
     if (match != null)

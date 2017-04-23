@@ -77,7 +77,7 @@ export function validateOz(fileName:string, validateOnSave = true, ozCompilerPat
 
 function parseBindAnalysis(text:string, fileName:string):IOzMessage
 {
-    var regex = /.*(warning|error).*\%\*\*\%\*\*(.*)\n\%\*\*\%\*\*.*\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
+    var regex = /.*(warning|error).*\%\*\*\%\*\*(.*)\%\*\*\%\*\*.*\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
     var match = regex.exec(text);
     var diagnostic:IOzMessage;
     if (match != null)
@@ -92,12 +92,12 @@ function parseBindAnalysis(text:string, fileName:string):IOzMessage
 
 function parseStaticAnalysis(text:string, fileName:string):IOzMessage
 {
-    var regex = /\*+\sstatic analysis (warning|error)\s\*+\%\*\*\%\*\*(.*)\%\*\*((.|\n|\r)*)\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
+    var regex = /\*\*+\sstatic analysis (warning|error) \*+\%\*\*\%\*\*\s([\w+\s+]+)\%\*\*\%\*\*.*\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
     var match = regex.exec(text);
     var diagnostic:IOzMessage;
     if (match != null)
     {
-        var [_, textSeverity, message, _, _, _, line, column] = match;
+        var [_, textSeverity, message, _, line, column] = match;
         var severity:DiagnosticSeverity = textSeverity=="warning" ? DiagnosticSeverity.Warning : DiagnosticSeverity.Error;
         diagnostic = {fileName:fileName, line:+line, column:+column+1, message:message, severity};
     }

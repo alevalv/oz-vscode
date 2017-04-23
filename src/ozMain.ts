@@ -4,8 +4,9 @@
 import vscode = require('vscode');
 import fs = require('fs');
 import {commands, window, workspace, InputBoxOptions} from 'vscode';
-import {Severity, IOzMessage, validateOz} from './ozlinter'
+import {IOzMessage, validateOz} from './ozlinter'
 
+const IS_WINDOWS = /^win/.test(process.platform);
 const LINTER_CONFIGURATION_PROPERTY_NAME = 'enablelinter';
 const COMPILER_PATH_PROPERTY_NAME = 'compilerpath';
 const OZ_LANGUAGE = 'oz';
@@ -32,23 +33,27 @@ function ozLinting(context: vscode.ExtensionContext):void
     {
         return;
     }
-    /*
-    if (!configuration.has[COMPILER_PATH_PROPERTY_NAME] || configuration[COMPILER_PATH_PROPERTY_NAME] == null)
+
+    var ozCompilerPath:string;
+    if (IS_WINDOWS && (!configuration.has[COMPILER_PATH_PROPERTY_NAME] || configuration[COMPILER_PATH_PROPERTY_NAME] == null))
     {
         window.showErrorMessage("Could not find path to the oz executable in the configuration file")
         return;
     }
-    */
-
-    var ozCompilerPath = 'ozc';//configuration[COMPILER_PATH_PROPERTY_NAME];
-
-/*
-    if (!fs.existsSync(ozCompilerPath))
+    else if (!IS_WINDOWS)
     {
-        window.showErrorMessage("Cannot find the Oz Compiler at the specified path, check your configuration file")
-        return;
+        ozCompilerPath = 'ozc';
     }
- */
+    else
+    {
+        ozCompilerPath = configuration[COMPILER_PATH_PROPERTY_NAME];
+        if (!fs.existsSync(ozCompilerPath))
+        {
+            window.showErrorMessage("Cannot find the Oz Compiler at the specified path, check your configuration file")
+            return;
+        }
+    }
+
     diagnosticCollection = vscode.languages.createDiagnosticCollection(OZ_LANGUAGE);
     context.subscriptions.push(diagnosticCollection);
 
@@ -57,19 +62,6 @@ function ozLinting(context: vscode.ExtensionContext):void
 
 function documentValidator(document:vscode.TextDocument, ozCompilerPath:string)
 {
-    function mapSeverity(severity:Severity)
-    {
-        switch (severity)
-        {
-            case Severity.Error:
-                return vscode.DiagnosticSeverity.Error;
-            case Severity.Warning:
-                return vscode.DiagnosticSeverity.Warning;
-            default: return vscode.DiagnosticSeverity.Error;
-
-        }
-    }
-
     if (document.languageId != OZ_LANGUAGE)
     {
         return;
@@ -90,7 +82,7 @@ function documentValidator(document:vscode.TextDocument, ozCompilerPath:string)
                     var startColumn = error.column;
                     var endColumn = error.column;
                     let errorRange = new vscode.Range(line, startColumn, line, endColumn);
-                    let errorDiagnostic = new vscode.Diagnostic(errorRange, error.message, mapSeverity(error.severity));
+                    let errorDiagnostic = new vscode.Diagnostic(errorRange, error.message, error.severity);
                     let diagnostics = diagnosticMap.get(currentUri);
                     if (!diagnostics)
                     {

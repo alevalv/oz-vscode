@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.1
+- Removed unfinished command from extension
+
 ## 0.1.0
 - Added a basic linter that uses the MOzArt compiler internally
 - Added example windows commands in the extension README

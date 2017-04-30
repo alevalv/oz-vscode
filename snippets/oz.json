@@ -141,12 +141,22 @@
         ],
         "description": "For block"
     },
+    "thread":
+    {
+        "prefix": "thread",
+        "body":
+        [
+            "thread",
+            "\t$1",
+            "end"
+        ]
+    },
     "System out":
     {
         "prefix": "sout",
         "body":
         [
-            "{System.print $1}"
+            "{System.show $1}"
         ]
     }
 }

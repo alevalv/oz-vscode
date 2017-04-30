@@ -43,12 +43,13 @@ export function validateOz(fileName:string, validateOnSave = true, ozCompilerPat
                                 var diagnostic:IOzMessage;
                                 const bindAnalysisRegex = /\*+ binding analysis.+/;
                                 const staticAnalysisRegex = /\*+ static analysis.+/;
+                                const parseRegex = /\*+ parse.+/;
                                 const newLineRegex = /\r\n?|\n/;
                                 while (newLineRegex.test(error))
                                 {
                                     error = error.replace(newLineRegex, '');
                                 }
-                                if (bindAnalysisRegex.test(error))
+                                if (bindAnalysisRegex.test(error)||parseRegex.test(error))
                                 {
                                     diagnostic = parseBindAnalysis(error, fileName);
                                 }

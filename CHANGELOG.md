@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.2
+- Added thread snippet
+- Fixed linter not showing parse errors (#2)
+
 ## 0.1.1
 - Removed unfinished command from extension
 

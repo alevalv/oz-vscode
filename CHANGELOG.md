@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.4
+- Fixed operators being highlighted as control words
+
 ## 0.1.3
 - Fixed various highlighting issues
 - Added highlighting for Atoms

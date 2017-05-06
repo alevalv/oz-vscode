@@ -6,6 +6,9 @@
             "include": "#keywords"
         },
         {
+            "include": "#operators"
+        },
+        {
             "include": "#constants"
         },
         {
@@ -26,7 +29,8 @@
     ],
     "repository": {
         "keywords": {
-            "patterns": [
+            "patterns":
+            [
                 {
                     "name": "keyword.control.oz",
                     "match": "\\b(then|and|andthen|at|attr|choice|class|cond|declare|define|dis|div|do|elsecase|export|fail|feat|finally|for|from|functor|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|prop|require|self|skip|then|thread|unit|end|local)\\b"
@@ -46,13 +50,19 @@
                 {
                     "name": "keyword.control.case.oz",
                     "match": "\\b(case|of|then)\\b"
-                },
+                }
+            ]
+        },
+        "operators":
+        {
+            "patterns":
+            [
                 {
-                    "name": "keyword.control.operator.oz",
+                    "name": "keyword.operator.oz",
                     "match": "[\\b|\\s]*(<:|:>|\\+|-|::|&|@|==|<=|>=|>|<|#|\\||\\[\\]|_)[\\b|\\s]*"
                 },
                 {
-                    "name": "keyword.control.operator.assignment.oz",
+                    "name": "keyword.operator.assignment.oz",
                     "match": "[\\b|\\s]*(\\=|\\:=)[\\b|\\s]*"
                 }
             ]

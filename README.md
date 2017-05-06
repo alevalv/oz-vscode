@@ -44,15 +44,15 @@ You can add the following code to the project's tasks.json to run Oz code from V
             "isTestCommand": true,
             "isBackground": false
         },
-         {
-             "taskName": "clean",
-             "command": "rm",
-             "isShellCommand": true,
-             "args": [
-                 "${fileBasenameNoExtension}.ozf"
-             ],
-             "showOutput": "silent"
-          }
+        {
+            "taskName": "clean",
+            "command": "rm",
+            "isShellCommand": true,
+            "args": [
+                "${fileBasenameNoExtension}.ozf"
+            ],
+            "showOutput": "silent"
+        }
     ]
 }
 

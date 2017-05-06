@@ -49,15 +49,11 @@
                 },
                 {
                     "name": "keyword.control.operator.oz",
-                    "match": "[\\b|\\s]*(\\+|-|::|&|@|==|=<|>=|>|<|#|\\||\\[\\])[\\b|\\s]*"
-                },
-                {
-                    "name": "keyword.control.operator.dot.oz",
-                    "match": "[A-Za-z](\\.)[\\w|\\d]"
+                    "match": "[\\b|\\s]*(<:|:>|\\+|-|::|&|@|==|<=|>=|>|<|#|\\||\\[\\]|_)[\\b|\\s]*"
                 },
                 {
                     "name": "keyword.control.operator.assignment.oz",
-                    "match": "[\\b|\\s]*(\\=|\\=:)[\\b|\\s]*"
+                    "match": "[\\b|\\s]*(\\=|\\:=)[\\b|\\s]*"
                 }
             ]
         },
@@ -93,11 +89,39 @@
                 },
                 {
                     "name": "string.quoted.double.oz",
-                    "match": "\".+\""
+                    "match": "(\".+\")"
                 },
                 {
                     "name": "string.quoted.single.oz",
-                    "match": "'.+'"
+                    "match": "('.+')"
+                },
+                {
+                    "name": "meta.string.unquoted.oz",
+                    "match": "[\\b|\\s]*([a-z][\\w|\\d]*)[\\b|\\s]*",
+                    "captures": {
+                        "1":
+                        {
+                            "patterns": [
+                                {
+                                    "include": "#keywords"
+                                }
+                            ],
+                            "name": "string.unquoted.oz"
+                        }
+                    },
+                    "disabled": 1
+
+                },
+                {
+                    "name": "meta.list.position.oz",
+                    "match": "\\b[A-Z][A-Za-z0-9]*(\\.[\\d]+)\\b",
+                    "captures":
+                    {
+                        "1":
+                        {
+                            "name": "keyword.control.operator.dot.oz"
+                        }
+                    }
                 }
             ]
         },

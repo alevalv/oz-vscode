@@ -14,65 +14,54 @@ export interface IOzMessage {
     severity:DiagnosticSeverity;
 }
 
-export function validateOz(fileName:string, validateOnSave = true, ozCompilerPath="oz"):Promise<IOzMessage[]>
+export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMessage[]>
 {
-    var validate;
-    if (validateOnSave)
-    {
-        validate = Promise.resolve([]);
-    }
-    else
-    {
-        validate = new Promise(
-            (resolve, reject) =>
+    var validate= new Promise(
+        (resolve, reject) =>
+        {
+            var fileName = window.activeTextEditor.document.fileName;
+            cp.execFile(
+            ozCompilerPath,
+            ['-c', fileName],
+            (error, stdOut, stdErr) =>
             {
-                var fileName = window.activeTextEditor.document.fileName;
-                cp.execFile(
-                ozCompilerPath,
-                ['-c', fileName],
-                (error, stdOut, stdErr) =>
+                try
                 {
-                    try
-                    {
-                        var errors = stdErr.split('%******');
-                        var parsedErrors:IOzMessage[] = [];
-
-                        errors.forEach(
-                            error =>
+                    var errors = stdErr.split('%******');
+                    var parsedErrors:IOzMessage[] = [];
+                    errors.forEach(
+                        error =>
+                        {
+                            var diagnostic:IOzMessage;
+                            const bindAnalysisRegex = /\*+ binding analysis.+/;
+                            const staticAnalysisRegex = /\*+ static analysis.+/;
+                            const parseRegex = /\*+ parse.+/;
+                            const newLineRegex = /\r\n?|\n/;
+                            while (newLineRegex.test(error))
                             {
-                                var diagnostic:IOzMessage;
-                                const bindAnalysisRegex = /\*+ binding analysis.+/;
-                                const staticAnalysisRegex = /\*+ static analysis.+/;
-                                const parseRegex = /\*+ parse.+/;
-                                const newLineRegex = /\r\n?|\n/;
-                                while (newLineRegex.test(error))
-                                {
-                                    error = error.replace(newLineRegex, '');
-                                }
-                                if (bindAnalysisRegex.test(error)||parseRegex.test(error))
-                                {
-                                    diagnostic = parseBindAnalysis(error, fileName);
-                                }
-                                else if (staticAnalysisRegex.test(error))
-                                {
-                                    diagnostic = parseStaticAnalysis(error, fileName);
-                                }
-
-                                if (diagnostic != null)
-                                {
-                                    parsedErrors.push(diagnostic);
-                                }
-                            });
-                        resolve(parsedErrors);
-                    }
-                    catch(error)
-                    {
-                        reject(error);
-                    }
-                });
+                                error = error.replace(newLineRegex, '');
+                            }
+                            if (bindAnalysisRegex.test(error)||parseRegex.test(error))
+                            {
+                                diagnostic = parseBindAnalysis(error, fileName);
+                            }
+                            else if (staticAnalysisRegex.test(error))
+                            {
+                                diagnostic = parseStaticAnalysis(error, fileName);
+                            }
+                            if (diagnostic != null)
+                            {
+                                parsedErrors.push(diagnostic);
+                            }
+                        });
+                    resolve(parsedErrors);
+                }
+                catch(error)
+                {
+                    reject(error);
+                }
             });
-    }
-
+        });
     return Promise.all([validate]).then(results => [].concat.apply([], results));
 }
 
@@ -104,18 +93,3 @@ function parseStaticAnalysis(text:string, fileName:string):IOzMessage
     }
     return diagnostic;
 }
-
-/*
-function parse(text:string, fileName:string, regex:RegExp):IOzMessage
-{
-    var match = regex.exec(text);
-    var diagnostic:IOzMessage;
-    if (match != null)
-    {
-        var [_, textSeverity, message, _, line, column] = match;
-        var severity:Severity = textSeverity=="warning" ? Severity.Warning : Severity.Error;
-        diagnostic = {fileName:fileName, line:+line, column:+column, message:message, severity};
-    }
-    return diagnostic;
-}
-*/

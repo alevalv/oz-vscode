@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.1.5
+- Improved highlighting of quoted strings
+- Fixed issues with atom highlighting
+- Rewritten README
+
 ## 0.1.4
 - Fixed operators being highlighted as control words
 

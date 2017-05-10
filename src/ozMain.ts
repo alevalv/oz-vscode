@@ -14,14 +14,7 @@ const OZ_LANGUAGE = 'oz';
 let terminal: vscode.Terminal;
 let diagnosticCollection: vscode.DiagnosticCollection;
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext)
-{
-    ozLinting(context);
-}
-
-function ozLinting(context: vscode.ExtensionContext):void
 {
     console.log("Activating MOzArt for VSCode extension");
 
@@ -35,7 +28,8 @@ function ozLinting(context: vscode.ExtensionContext):void
     var ozCompilerPath:string;
     if (IS_WINDOWS && configuration[COMPILER_PATH_PROPERTY_NAME] == null)
     {
-        window.showErrorMessage("Could not find path to the oz executable in the configuration file")
+        window.showErrorMessage(
+            "Could not find path to the oz executable in the configuration file")
         return;
     }
     else if (!IS_WINDOWS)
@@ -47,7 +41,8 @@ function ozLinting(context: vscode.ExtensionContext):void
         ozCompilerPath = configuration[COMPILER_PATH_PROPERTY_NAME];
         if (!fs.existsSync(ozCompilerPath))
         {
-            window.showErrorMessage("Cannot find the Oz Compiler at the specified path, check your configuration file")
+            window.showErrorMessage(
+                "Cannot find the Oz Compiler at the specified path, check your configuration file")
             return;
         }
     }
@@ -55,7 +50,8 @@ function ozLinting(context: vscode.ExtensionContext):void
     diagnosticCollection = vscode.languages.createDiagnosticCollection(OZ_LANGUAGE);
     context.subscriptions.push(diagnosticCollection);
 
-    context.subscriptions.push(workspace.onDidSaveTextDocument(document => {documentValidator(document, ozCompilerPath)}))
+    context.subscriptions.push(workspace.onDidSaveTextDocument(
+        document => {documentValidator(document, ozCompilerPath)}))
 }
 
 function documentValidator(document:vscode.TextDocument, ozCompilerPath:string)
@@ -65,7 +61,7 @@ function documentValidator(document:vscode.TextDocument, ozCompilerPath:string)
         return;
     }
 
-    validateOz(document.uri.fsPath, false, ozCompilerPath).then(
+    validateOz(document.uri.fsPath, ozCompilerPath).then(
         errors =>
         {
             diagnosticCollection.clear();
@@ -90,8 +86,6 @@ function documentValidator(document:vscode.TextDocument, ozCompilerPath:string)
                     diagnosticMap.set(currentUri, diagnostics);
                 })
 
-
-
             let entries: [vscode.Uri, vscode.Diagnostic[]][] = [];
             diagnosticMap.forEach(
                 (diagnostic, uri) =>
@@ -106,6 +100,5 @@ function documentValidator(document:vscode.TextDocument, ozCompilerPath:string)
         });
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {
 }

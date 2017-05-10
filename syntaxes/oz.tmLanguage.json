@@ -15,9 +15,6 @@
             "include": "#entities"
         },
         {
-            "include": "variables"
-        },
-        {
             "include": "#comments"
         },
         {
@@ -59,7 +56,7 @@
             [
                 {
                     "name": "keyword.operator.oz",
-                    "match": "[\\b|\\s]*(<:|:>|\\+|-|::|&|@|==|<=|>=|>|<|#|\\||\\[\\]|_)[\\b|\\s]*"
+                    "match": "(<:|:>|\\+|-|::|&|@|==|<=|>=|>|<|#|\\||_|\\[\\])"
                 },
                 {
                     "name": "keyword.operator.assignment.oz",
@@ -99,15 +96,43 @@
                 },
                 {
                     "name": "string.quoted.double.oz",
-                    "match": "(\".+\")"
+                    "match": "(\")(.*)(\")",
+                    "captures": {
+                        "1":
+                        {
+                            "name": "keyword.control.string.quoted.double.oz"
+                        },
+                        "2":
+                        {
+                            "name": "string.quoted.single.oz"
+                        },
+                        "3":
+                        {
+                            "name": "keyword.control.string.quoted.double.oz"
+                        }
+                    }
                 },
                 {
-                    "name": "string.quoted.single.oz",
-                    "match": "('.+')"
+                    "name": "meta.string.quoted.single.oz",
+                    "match": "(')(.*)(')",
+                    "captures": {
+                        "1":
+                        {
+                            "name": "keyword.control.string.quoted.single.oz"
+                        },
+                        "2":
+                        {
+                            "name": "string.quoted.single.oz"
+                        },
+                        "3":
+                        {
+                            "name": "keyword.control.string.quoted.single.oz"
+                        }
+                    }
                 },
                 {
                     "name": "meta.string.unquoted.oz",
-                    "match": "[\\b|\\s]*([a-z][\\w|\\d]*)[\\b|\\s]*",
+                    "match": "\\b([a-z][A-Za-z0-9]*)\\b",
                     "captures": {
                         "1":
                         {
@@ -118,8 +143,7 @@
                             ],
                             "name": "string.unquoted.oz"
                         }
-                    },
-                    "disabled": 1
+                    }
 
                 },
                 {
@@ -147,7 +171,7 @@
                     "captures":{
                         "0" :
                         {
-                            "name": "punctuation.definition.comment.mn"
+                            "name": "punctuation.definition.comment.oz"
                         }
                     },
                     "end": "\\*/"

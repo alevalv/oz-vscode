@@ -36,12 +36,13 @@ export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMess
                             const bindAnalysisRegex = /\*+ binding analysis.+/;
                             const staticAnalysisRegex = /\*+ static analysis.+/;
                             const parseRegex = /\*+ parse.+/;
+                            const syntaxErrorRegex = /\*+ syntax error.+/;
                             const newLineRegex = /\r\n?|\n/;
                             while (newLineRegex.test(error))
                             {
                                 error = error.replace(newLineRegex, '');
                             }
-                            if (bindAnalysisRegex.test(error)||parseRegex.test(error))
+                            if (bindAnalysisRegex.test(error)||parseRegex.test(error)||syntaxErrorRegex.test(error))
                             {
                                 diagnostic = parseBindAnalysis(error, fileName);
                             }
@@ -67,14 +68,14 @@ export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMess
 
 function parseBindAnalysis(text:string, fileName:string):IOzMessage
 {
-    var regex = /.*(warning|error).*\%\*\*\%\*\*(.*)\%\*\*\%\*\*.*\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
+    var regex = /\*+\s(\w*)\s(warning|error).*\%\*\*\%\*\*(.*)\%\*\*\%\*\*.*\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
     var match = regex.exec(text);
     var diagnostic:IOzMessage;
     if (match != null)
     {
-        var [_, textSeverity, message, _, line, column] = match;
+        var [_, errorType, textSeverity, message, _, line, column] = match;
         var severity:DiagnosticSeverity = textSeverity=="warning" ? DiagnosticSeverity.Warning : DiagnosticSeverity.Error;
-        diagnostic = {fileName:fileName, line:+line, column:+column, message:message, severity};
+        diagnostic = {fileName:fileName, line:+line, column:+column, message:(errorType + ": " + message), severity};
 
     }
     return diagnostic;
@@ -89,7 +90,7 @@ function parseStaticAnalysis(text:string, fileName:string):IOzMessage
     {
         var [_, textSeverity, message, _, line, column] = match;
         var severity:DiagnosticSeverity = textSeverity=="warning" ? DiagnosticSeverity.Warning : DiagnosticSeverity.Error;
-        diagnostic = {fileName:fileName, line:+line, column:+column+1, message:message, severity};
+        diagnostic = {fileName:fileName, line:+line, column:+column+1, message:("static analysis: " + message), severity};
     }
     return diagnostic;
 }

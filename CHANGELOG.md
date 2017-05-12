@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.7
+- Fixed linter not showing binding analysis errors
+
 ## 0.1.6
 - Fixed linter not showing syntax errors
 - Linter now shows the type of the warning/error

@@ -68,7 +68,7 @@ export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMess
 
 function parseBindAnalysis(text:string, fileName:string):IOzMessage
 {
-    var regex = /\*+\s(\w*)\s(warning|error).*\%\*\*\%\*\*(.*)\%\*\*\%\*\*.*\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
+    var regex = /\*+\s(.*)\s(warning|error).*\%\*\*\%\*\*(.*)\%\*\*\%\*\*.*\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
     var match = regex.exec(text);
     var diagnostic:IOzMessage;
     if (match != null)

@@ -4,22 +4,21 @@ import vscode = require('vscode');
 import path = require('path');
 import cp = require('child_process');
 
-import {window, DiagnosticSeverity} from 'vscode';
+import {DiagnosticSeverity as Severity} from 'vscode';
 
 export interface IOzMessage {
     fileName:string;
     line:number;
     column:number;
     message:string;
-    severity:DiagnosticSeverity;
+    severity:Severity;
 }
 
 export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMessage[]>
 {
-    var validate= new Promise(
+    var validate = new Promise(
         (resolve, reject) =>
         {
-            var fileName = window.activeTextEditor.document.fileName;
             cp.execFile(
             ozCompilerPath,
             ['-c', fileName],
@@ -33,16 +32,19 @@ export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMess
                         error =>
                         {
                             var diagnostic:IOzMessage;
+                            //check which type of error have been sent from the compiler
+                            //some of them have different structures, so a different regex must
+                            //be defined
                             const bindAnalysisRegex = /\*+ binding analysis.+/;
                             const staticAnalysisRegex = /\*+ static analysis.+/;
                             const parseRegex = /\*+ parse.+/;
                             const syntaxErrorRegex = /\*+ syntax error.+/;
-                            const newLineRegex = /\r\n?|\n/;
-                            while (newLineRegex.test(error))
-                            {
-                                error = error.replace(newLineRegex, '');
-                            }
-                            if (bindAnalysisRegex.test(error)||parseRegex.test(error)||syntaxErrorRegex.test(error))
+
+                            error = removeNewLines(error);
+                            if (
+                                bindAnalysisRegex.test(error)
+                                || parseRegex.test(error)
+                                || syntaxErrorRegex.test(error))
                             {
                                 diagnostic = parseBindAnalysis(error, fileName);
                             }
@@ -66,6 +68,16 @@ export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMess
     return Promise.all([validate]).then(results => [].concat.apply([], results));
 }
 
+function removeNewLines(input:string):string
+{
+    const newLineRegex = /\r\n?|\n/;
+    while (newLineRegex.test(input))
+    {
+        input = input.replace(newLineRegex, '');
+    }
+    return input;
+}
+
 function parseBindAnalysis(text:string, fileName:string):IOzMessage
 {
     var regex = /\*+\s(.*)\s(warning|error).*\%\*\*\%\*\*(.*)\%\*\*\%\*\*.*\/(.*)\.oz.*line\s([0-9]+).*column\s([0-9]+)/;
@@ -74,9 +86,15 @@ function parseBindAnalysis(text:string, fileName:string):IOzMessage
     if (match != null)
     {
         var [_, errorType, textSeverity, message, _, line, column] = match;
-        var severity:DiagnosticSeverity = textSeverity=="warning" ? DiagnosticSeverity.Warning : DiagnosticSeverity.Error;
-        diagnostic = {fileName:fileName, line:+line, column:+column, message:(errorType + ": " + message), severity};
-
+        var severity:Severity = textSeverity=="warning" ? Severity.Warning : Severity.Error;
+        diagnostic =
+            {
+                fileName: fileName,
+                line: +line,
+                column: +column,
+                message: (errorType + ": " + message),
+                severity: severity
+            };
     }
     return diagnostic;
 }
@@ -89,8 +107,15 @@ function parseStaticAnalysis(text:string, fileName:string):IOzMessage
     if (match != null)
     {
         var [_, textSeverity, message, _, line, column] = match;
-        var severity:DiagnosticSeverity = textSeverity=="warning" ? DiagnosticSeverity.Warning : DiagnosticSeverity.Error;
-        diagnostic = {fileName:fileName, line:+line, column:+column+1, message:("static analysis: " + message), severity};
+        var severity:Severity = textSeverity=="warning" ? Severity.Warning : Severity.Error;
+        diagnostic =
+        {
+            fileName: fileName,
+            line: +line,
+            column: +column+1,
+            message: ("static analysis: " + message),
+            severity: severity
+        };
     }
     return diagnostic;
 }

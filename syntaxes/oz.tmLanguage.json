@@ -30,23 +30,23 @@
             [
                 {
                     "name": "keyword.control.oz",
-                    "match": "\\b(then|and|andthen|at|attr|choice|class|cond|declare|define|dis|div|do|elsecase|export|fail|feat|finally|for|from|functor|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|prop|require|self|skip|then|thread|unit|end|local)\\b"
+                    "match": "(?<!'|\")\\b(then|andthen|at|attr|choice|class|cond|declare|define|dis|div|do|elsecase|export|fail|feat|finally|for|from|functor|import|in|lazy|lock|meth|mod|not|of|or|orelse|prepare|prop|require|self|skip|then|thread|unit|end|local)\\b"
                 },
                 {
                     "name": "keyword.control.conditional.oz",
-                    "match": "\\b(else|elseif|if)\\b"
+                    "match": "(?<!'|\")\\b(else|elseif|if)\\b"
                 },
                 {
                     "name": "keyword.control.function.oz",
-                    "match": "\\b(fun|proc)\\b"
+                    "match": "(?<!'|\")\\b(fun|proc)\\b"
                 },
                 {
                     "name": "keyword.control.trycatch.oz",
-                    "match": "\\b(catch|raise|try|finally)\\b"
+                    "match": "(?<!'|\")\\b(catch|raise|try|finally)\\b"
                 },
                 {
                     "name": "keyword.control.case.oz",
-                    "match": "\\b(case|of|then)\\b"
+                    "match": "(?<!'|\")\\b(case|of|then)\\b"
                 }
             ]
         },
@@ -56,11 +56,23 @@
             [
                 {
                     "name": "keyword.operator.oz",
-                    "match": "(<:|:>|\\+|-|::|&|@|==|<=|>=|>|<|#|\\||_|\\[\\]|\\.\\.\\.)"
+                    "match": "(<:|:>|::|&|@|#|_|\\[\\]|\\.\\.\\.)"
                 },
                 {
                     "name": "keyword.operator.assignment.oz",
-                    "match": "[\\b|\\s]*(\\=|\\:=)[\\b|\\s]*"
+                    "match": "(\\=|\\:=)"
+                },
+                {
+                    "name": "keyword.operator.comparison.oz",
+                    "match": "<|=<|==|\\=|>=|>"
+                },
+                {
+                    "name": "keyword.control.arithmetic.oz",
+                    "match": "(\\*|\\+|\\-|/|~)|\\b(div|mod)\\b"
+                },
+                {
+                    "name": "keyword.operator.list.oz",
+                    "match": "\\b\\|\\b"
                 }
             ]
         },
@@ -80,27 +92,22 @@
             "patterns": [
                 {
                     "name": "meta.function.call.oz",
-                    "match": "{([[A-z0-9]+\\.*]+|\\$)\\s([[A-z0-9]+\\s*]+)}",
+                    "match": "{([A-Z[A-z0-9]+\\.*]+|\\$)",
                     "captures":
                     {
                         "1":
                         {
                             "name": "entity.name.function.oz"
-                        },
-                        "2":
-                        {
-                            "name": "variable.parameter.oz"
                         }
-
                     }
                 },
                 {
                     "name": "string.quoted.double.oz",
-                    "match": "(\")(.*)(\")",
+                    "match": "(\")([A-Za-z0-9]*)(\")",
                     "captures": {
                         "1":
                         {
-                            "name": "keyword.control.string.quoted.double.oz"
+                            "name": "punctuation.definition.string.begin.oz"
                         },
                         "2":
                         {
@@ -108,17 +115,17 @@
                         },
                         "3":
                         {
-                            "name": "keyword.control.string.quoted.double.oz"
+                            "name": "punctuation.definition.string.end.oz"
                         }
                     }
                 },
                 {
-                    "name": "meta.string.quoted.single.oz",
-                    "match": "(')(.*)(')",
+                    "name": "string.quoted.single.oz",
+                    "match": "(')([A-Za-z0-9]*)(')",
                     "captures": {
                         "1":
                         {
-                            "name": "keyword.control.string.quoted.single.oz"
+                            "name": "punctuation.definition.string.begin.oz"
                         },
                         "2":
                         {
@@ -126,12 +133,12 @@
                         },
                         "3":
                         {
-                            "name": "keyword.control.string.quoted.single.oz"
+                            "name": "punctuation.definition.string.end.oz"
                         }
                     }
                 },
                 {
-                    "name": "meta.string.unquoted.oz",
+                    "name": "string.unquoted.oz",
                     "match": "\\b([a-z][A-Za-z0-9]*)\\b",
                     "captures": {
                         "1":

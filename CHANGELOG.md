@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.8
+- Fixed several highlighting issues
+
 ## 0.1.7
 - Fixed linter not showing binding analysis errors
 

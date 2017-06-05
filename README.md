@@ -1,13 +1,23 @@
 MOzArt for VSCode Extension
 ===========================
+[![Current Version](https://img.shields.io/github/release/alevalv/oz-vscode.svg?style=flat-square)](https://github.com/alevalv/oz-vscode/releases)
+[![Installs](http://vsmarketplacebadge.apphb.com/installs/alevalv.oz-vscode.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=alevalv.oz-vscode)
+[![Issues](https://img.shields.io/github/issues/alevalv/oz-vscode.svg?style=flat-square)](https://github.com/alevalv/oz-vscode/issues)
 
-This extension adds support to the MOzArt language to Visual Studio Code. It provides syntax coloring, common snippets and a linter.
+This extension adds support for the MOzArt language to Visual Studio Code. It provides syntax coloring, common snippets and a linter.
 
-# Linting
+Linting
+-------
+
+**Known issue:** Since the oz compiler is used to perform linting, multiple ozf files will be created in the user home directory, these files can be deleted with no consequences.
 
 To use the included linter, set property `oz.enablelinter` with `true`. If you are on Windows, you must set `oz.compilerpath` with the path to your compiler (ozc.exe); for Linux, the extension assumes that the Oz compiler is in the path. The errors are extracted from compiler output.
 
-# Executing code from Visual Studio Code
+Linting is only performed when a file is saved.
+
+
+Executing code from Visual Studio Code
+--------------------------------------
 
 You can add the following code to the project's tasks.json to run Oz code from VSCode (if you have a different Oz path, modify them before running, for Windows Only):
 

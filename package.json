@@ -20,6 +20,9 @@
         "url": "https://github.com/alevalv/oz-vscode.git"
     },
     "icon": "images/icon.png",
+    "galleryBanner": {
+        "color": "#eff1f3"
+    },
     "bugs": "https://github.com/alevalv/oz-vscode/issues",
 
     "activationEvents": [

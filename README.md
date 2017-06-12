@@ -1,5 +1,6 @@
 MOzArt for VSCode Extension
 ===========================
+
 [![Current Version](https://img.shields.io/github/release/alevalv/oz-vscode.svg?style=flat-square)](https://github.com/alevalv/oz-vscode/releases)
 [![Installs](http://vsmarketplacebadge.apphb.com/installs/alevalv.oz-vscode.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=alevalv.oz-vscode)
 [![Issues](https://img.shields.io/github/issues/alevalv/oz-vscode.svg?style=flat-square)](https://github.com/alevalv/oz-vscode/issues)
@@ -14,7 +15,6 @@ Linting
 To use the included linter, set property `oz.enablelinter` with `true`. If you are on Windows, you must set `oz.compilerpath` with the path to your compiler (ozc.exe); for Linux, the extension assumes that the Oz compiler is in the path. The errors are extracted from compiler output.
 
 Linting is only performed when a file is saved.
-
 
 Executing code from Visual Studio Code
 --------------------------------------

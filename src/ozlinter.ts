@@ -1,7 +1,5 @@
 'use strict';
 
-import vscode = require('vscode');
-import path = require('path');
 import cp = require('child_process');
 
 import {DiagnosticSeverity as Severity} from 'vscode';
@@ -13,6 +11,18 @@ export interface IOzMessage {
     message:string;
     severity:Severity;
 }
+const IS_WINDOWS = /^win/.test(process.platform);
+const noErrorRegex = /% -+ accepted/;
+const linuxFilenameRegex = /[\/\w+]+\/(\w+\.ozf)/;
+
+//check which type of error have been sent from the compiler
+//some of them have different structures, so a different regex must
+//be defined, the following regex detects a unique identifier from the error
+//to differentiate them
+const bindAnalysisRegex = /\*+ binding analysis.+/;
+const staticAnalysisRegex = /\*+ static analysis.+/;
+const parseRegex = /\*+ parse.+/;
+const syntaxErrorRegex = /\*+ syntax error.+/;
 
 export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMessage[]>
 {
@@ -26,20 +36,24 @@ export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMess
             {
                 try
                 {
+                    if (noErrorRegex.test(stdErr))
+                    {
+                        const compiledFileName = fileName+"f";
+                        if (IS_WINDOWS)
+                        {
+                            cp.execFile("del", [compiledFileName]);
+                        }
+                        else
+                        {
+                            cp.execFile("rm", [linuxFilenameRegex.exec(compiledFileName).pop()]);
+                        }
+                    }
                     var errors = stdErr.split('%******');
                     var parsedErrors:IOzMessage[] = [];
                     errors.forEach(
                         error =>
                         {
                             var diagnostic:IOzMessage;
-                            //check which type of error have been sent from the compiler
-                            //some of them have different structures, so a different regex must
-                            //be defined
-                            const bindAnalysisRegex = /\*+ binding analysis.+/;
-                            const staticAnalysisRegex = /\*+ static analysis.+/;
-                            const parseRegex = /\*+ parse.+/;
-                            const syntaxErrorRegex = /\*+ syntax error.+/;
-
                             error = removeNewLines(error);
                             if (
                                 bindAnalysisRegex.test(error)

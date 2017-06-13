@@ -13,7 +13,6 @@ export interface IOzMessage {
 }
 const IS_WINDOWS = /^win/.test(process.platform);
 const noErrorRegex = /% -+ accepted/;
-const linuxFilenameRegex = /[\/\w+]+\/(\w+\.ozf)/;
 
 //check which type of error have been sent from the compiler
 //some of them have different structures, so a different regex must
@@ -38,14 +37,14 @@ export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMess
                 {
                     if (noErrorRegex.test(stdErr))
                     {
-                        const compiledFileName = fileName+"f";
+                        const compiledFileName = fileName.split('\\').pop().split('/').pop() + "f";
                         if (IS_WINDOWS)
                         {
                             cp.execFile("del", [compiledFileName]);
                         }
                         else
                         {
-                            cp.execFile("rm", [linuxFilenameRegex.exec(compiledFileName).pop()]);
+                            cp.execFile("rm", [compiledFileName]);
                         }
                     }
                     var errors = stdErr.split('%******');

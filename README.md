@@ -10,11 +10,9 @@ This extension adds support for the MOzArt language to Visual Studio Code. It pr
 Linting
 -------
 
-**Known issue:** Since the oz compiler is used to perform linting, multiple ozf files will be created in the user home directory, these files can be deleted with no consequences.
-
 To use the included linter, set property `oz.enablelinter` with `true`. If you are on Windows, you must set `oz.compilerpath` with the path to your compiler (ozc.exe); for Linux, the extension assumes that the Oz compiler is in the path. The errors are extracted from compiler output.
 
-Linting is only performed when a file is saved.
+Linting is performed when a file is saved.
 
 Executing code from Visual Studio Code
 --------------------------------------

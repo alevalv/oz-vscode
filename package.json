@@ -2,7 +2,7 @@
     "name": "oz-vscode",
     "displayName": "MOzArt for VSCode",
     "description": "MOzArt Language Support for Visual Studio Code",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "publisher": "alevalv",
     "preview": true,
     "license": "GPL-3.0",

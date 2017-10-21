@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.10
+
+- Fixed multiline comments not showing correctly
+
 ## 0.1.9
 
 - Fixed #3 (ozf files in home directory)

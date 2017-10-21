@@ -3,6 +3,9 @@
     "name": "Mozart-Oz",
     "patterns": [
         {
+            "include": "#comments"
+        },
+        {
             "include": "#keywords"
         },
         {
@@ -13,9 +16,6 @@
         },
         {
             "include": "#entities"
-        },
-        {
-            "include": "#comments"
         },
         {
             "include": "#invalid"
@@ -170,19 +170,36 @@
             "patterns": [
                 {
                     "name": "comment.line.number-sign.oz",
-                    "match": "(%).*$\n?"
+                    "match": "%.*$\n?"
                 },
                 {
+                    "captures": {
+						"1": {
+							"name": "meta.toc-list.banner.block.oz"
+						}
+					},
                     "name": "comment.block.oz",
-                    "begin": "/\\*",
-                    "captures":{
-                        "0" :
-                        {
-                            "name": "punctuation.definition.comment.oz"
-                        }
-                    },
-                    "end": "\\*/"
-                }
+                    "match": "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?"
+                },
+				{
+					"begin": "/\\*",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.begin.oz"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.end.oz"
+						}
+					},
+					"name": "comment.block.c"
+				},
+				{
+					"match": "\\*/.*\\n",
+					"name": "invalid.illegal.stray-comment-end.oz"
+				}
             ]
         },
         "invalid":

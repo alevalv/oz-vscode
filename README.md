@@ -2,7 +2,7 @@ MOzArt for VSCode Extension
 ===========================
 
 [![Current Version](https://img.shields.io/github/release/alevalv/oz-vscode.svg?style=flat-square)](https://github.com/alevalv/oz-vscode/releases)
-[![Installs](http://vsmarketplacebadge.apphb.com/installs/alevalv.oz-vscode.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=alevalv.oz-vscode)
+[![Installs](https://vsmarketplacebadge.apphb.com/installs/alevalv.oz-vscode.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=alevalv.oz-vscode)
 [![Issues](https://img.shields.io/github/issues/alevalv/oz-vscode.svg?style=flat-square)](https://github.com/alevalv/oz-vscode/issues)
 
 This extension adds support for the MOzArt language to Visual Studio Code. It provides syntax coloring, common snippets and a linter.

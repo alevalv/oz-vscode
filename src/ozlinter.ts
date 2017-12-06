@@ -1,3 +1,21 @@
+/*
+ Mozart for Visual Studio Code Extension
+ Copyright (C) 2017  Alejandro Valdes
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 'use strict';
 
 import cp = require('child_process');
@@ -53,7 +71,7 @@ export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMess
                         error =>
                         {
                             var diagnostic:IOzMessage;
-                            error = removeNewLines(error);
+                            error = cleanErrorInput(error);
                             if (
                                 bindAnalysisRegex.test(error)
                                 || parseRegex.test(error)
@@ -81,7 +99,7 @@ export function validateOz(fileName:string, ozCompilerPath="oz"):Promise<IOzMess
     return Promise.all([validate]).then(results => [].concat.apply([], results));
 }
 
-function removeNewLines(input:string):string
+function cleanErrorInput(input:string):string
 {
     const newLineRegex = /\r\n?|\n/;
     while (newLineRegex.test(input))

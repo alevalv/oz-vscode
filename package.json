@@ -2,7 +2,7 @@
     "name": "oz-vscode",
     "displayName": "MOzArt for VSCode",
     "description": "MOzArt Language Support for Visual Studio Code",
-    "version": "0.1.10",
+    "version": "0.1.11",
     "publisher": "alevalv",
     "preview": true,
     "license": "GPL-3.0",
@@ -21,7 +21,8 @@
     },
     "icon": "images/icon.png",
     "galleryBanner": {
-        "color": "#eff1f3"
+        "color": "#eff1f3",
+        "theme": "light"
     },
     "bugs": "https://github.com/alevalv/oz-vscode/issues",
 

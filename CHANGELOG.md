@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.11
+
+- Fixed strings with spaces not being highlighted correctly
+
 ## 0.1.10
 
 - Fixed multiline comments not showing correctly

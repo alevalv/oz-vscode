@@ -1,9 +1,13 @@
-MOzArt for VSCode Extension
+[DEPRECATED] MOzArt for VSCode Extension
 ===========================
 
 [![Current Version](https://img.shields.io/github/release/alevalv/oz-vscode.svg?style=flat-square)](https://github.com/alevalv/oz-vscode/releases)
 [![Installs](https://vsmarketplacebadge.apphb.com/installs/alevalv.oz-vscode.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=alevalv.oz-vscode)
 [![Issues](https://img.shields.io/github/issues/alevalv/oz-vscode.svg?style=flat-square)](https://github.com/alevalv/oz-vscode/issues)
+
+**This extension is merged with the [Oz Extension](https://marketplace.visualstudio.com/items?itemName=mozart-oz.vscode-oz) from Mozart available at [GitHub](https://github.com/mozart/vscode-oz), which also has a better handling of mozart code and all the goodies of this extension as of 1.0.0. From now onwards it won't receive any updates and it will be archived. Please install the [Mozart official extension](https://marketplace.visualstudio.com/items?itemName=mozart-oz.vscode-oz) (which I'm also a maintainer) and remove this one. Thank you for using this extension :)**
+
+---
 
 This extension adds support for the MOzArt language to Visual Studio Code. It provides syntax coloring, common snippets and a linter.
 
